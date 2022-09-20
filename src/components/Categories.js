@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import NewCategoryForm from './NewCategoryForm'
 
-const Categories = ({ categories }) => {
+const Categories = ({ categories, onNewCategory }) => {
 
   const [formIsDisplayed, setFormIsDisplayed] = useState(false)
 
@@ -20,7 +20,7 @@ const Categories = ({ categories }) => {
     <>
             {mappedCategories}
             <div className="btn" onClick={handleToggleForm}>Add a New Category Here!</div>
-            {formIsDisplayed ? <NewCategoryForm /> : null}
+            {formIsDisplayed ? <NewCategoryForm onNewCategory={onNewCategory}/> : null}
     </>
   )
 }

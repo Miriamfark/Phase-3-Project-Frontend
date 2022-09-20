@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const NewCategoryForm = () => {
+const NewCategoryForm = ({ onNewCategory }) => {
 
     const [categoryName, setCategoryName] = useState("")
 
@@ -22,9 +22,8 @@ const NewCategoryForm = () => {
             .then((r) => r.json())
             .then((newCategory) => {
                 console.log(newCategory)
-                // handleNewTask(newTask)
-                // setName("")
-                // setMinutes("")
+                onNewCategory(newCategory)
+                setCategoryName("")
             })
     }
 
