@@ -14,6 +14,7 @@ function App() {
  const [days, setDays] = useState([])
  const [categories, setCategories] = useState([])
  const [tasks, setTasks] = useState([])
+ const [dayId, setDayId] = useState()
 
 
   useEffect(() => {
@@ -44,13 +45,16 @@ function handleDeleteTask(id) {
 }
 
 function updateTask(id) {
+
+  setDayId(id)
+
   fetch(`http://localhost:9292/tasks/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        body: "hello",
+        body: dayId,
       }),
     })
       .then((r) => r.json())

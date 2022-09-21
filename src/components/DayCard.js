@@ -19,7 +19,7 @@ const DayCard = ({ tasks, updateTask }) => {
         return(
             <>
                 <p key={task.id}>{task.name}</p>
-                <p className="btn" onClick={updateTask}>+</p>
+                <p className="btn" onClick={updateTask(id)}>+</p>
             </>
         )
       })
