@@ -15,6 +15,7 @@ function App() {
  const [categories, setCategories] = useState([])
  const [tasks, setTasks] = useState([])
  const [dayId, setDayId] = useState()
+ const [toDoToday, setToDoToday] = useState([])
 
 
   useEffect(() => {
@@ -47,6 +48,7 @@ function handleDeleteTask(id) {
 function updateTask(id) {
 
   setDayId(id)
+  console.log("dayId", dayId)
 
   fetch(`http://localhost:9292/tasks/${id}`, {
       method: "PATCH",
@@ -58,7 +60,12 @@ function updateTask(id) {
       }),
     })
       .then((r) => r.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        console.log(data)
+        setToDoToday([...toDoToday, data])
+}, []);
+
+      
 }
 
 function onNewCategory(newCategory) {
@@ -82,7 +89,7 @@ function onNewCategory(newCategory) {
                 <Route path="/tasks/new" element={<h1>New Task Form</h1>} />
                 <Route exact path="/" element={<Home />} />
                 <Route path="/days/*" element={<Days days={days} />} />
-                <Route path="/days/:id" element={<DayCard tasks={tasks} updateTask={updateTask} />} />
+                <Route path="/days/:id" element={<DayCard tasks={tasks} updateTask={updateTask} todoToday={toDoToday} />} />
                 <Route path="/categories/*" element={<Categories categories={categories} onNewCategory={onNewCategory} />} />
                 <Route path="/categories/new" element={<h1>New Category Form</h1>} />
                 <Route path="*" element={<h1>Sorry, this page does not exist</h1>} />

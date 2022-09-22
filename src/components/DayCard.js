@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-const DayCard = ({ tasks, updateTask }) => {
+const DayCard = ({ tasks, updateTask, toDoToday }) => {
 
     const [day, setDay] = useState("")
 
@@ -25,9 +25,15 @@ const DayCard = ({ tasks, updateTask }) => {
       })
     }
 
+    
+
   return (
     <div className="btn">
         {day}
+        <ul>
+            <p>To Do Today</p>
+            {toDoToday}
+        </ul>
         <p>Click on a task to add to to your to do list</p>
         <div>
             {mappedTasks}
