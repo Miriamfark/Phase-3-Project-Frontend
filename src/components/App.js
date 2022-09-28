@@ -45,6 +45,11 @@ function handleDeleteTask(id) {
   setTasks(updatedTasks);
 }
 
+function handleDeleteCategory(id) {
+  const updateCategories = categories.filter((category)=> category.id !== id)
+  setCategories(updateCategories)
+}
+
 function updateTask(id) {
 
   setDayId(id)
@@ -63,7 +68,7 @@ function updateTask(id) {
       .then((data) => {
         console.log(data)
         setToDoToday([...toDoToday, data])
-}, []);
+});
 
       
 }
@@ -90,7 +95,10 @@ function onNewCategory(newCategory) {
                 <Route exact path="/" element={<Home />} />
                 <Route path="/days/*" element={<Days days={days} />} />
                 <Route path="/days/:id" element={<DayCard tasks={tasks} updateTask={updateTask} todoToday={toDoToday} />} />
-                <Route path="/categories/*" element={<Categories categories={categories} onNewCategory={onNewCategory} />} />
+                <Route path="/categories/*" element={<Categories 
+                categories={categories} 
+                onNewCategory={onNewCategory}
+                handleDeleteCategory={handleDeleteCategory} />} />
                 <Route path="/categories/new" element={<h1>New Category Form</h1>} />
                 <Route path="*" element={<h1>Sorry, this page does not exist</h1>} />
             </ Routes>

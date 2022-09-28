@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom'
 const DayCard = ({ tasks, updateTask, toDoToday }) => {
 
     const [day, setDay] = useState("")
+    const [todaysTasks, setTodaysTasks] = useState([])
 
     let { id } = useParams()
 
@@ -13,13 +14,23 @@ const DayCard = ({ tasks, updateTask, toDoToday }) => {
             .then(data => setDay(data.name))
     }, [])
 
+    useEffect(()=>{
+      fetch(`http://localhost:9292/days/today/${id}`)
+        .then(r => r.json())
+        .then(data => setTodaysTasks(data))
+    }, [])
+
+    const mappedTodaysTasks = todaysTasks.map((task)=>{
+      return <li key={task.id}>{task.name} | {task.minutes} minutes</li>
+    })
+
     let mappedTasks
     if(tasks){
       mappedTasks = tasks.map((task)=>{
         return(
             <>
                 <p key={task.id}>{task.name}</p>
-                <p className="btn" onClick={updateTask(id)}>+</p>
+                <p className="btn" onClick={()=>updateTask(id)}>+</p>
             </>
         )
       })
@@ -30,10 +41,13 @@ const DayCard = ({ tasks, updateTask, toDoToday }) => {
   return (
     <div className="btn">
         {day}
-        <ul>
-            <p>To Do Today</p>
-            {toDoToday}
-        </ul>
+        <p>To Do Today</p>
+        
+            
+            <ul>
+              {mappedTodaysTasks}
+            </ul>
+       
         <p>Click on a task to add to to your to do list</p>
         <div>
             {mappedTasks}

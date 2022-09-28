@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import NewTaskForm from './NewTaskForm.js'
+// import DeleteButton from './DeleteButton.js'
 
 const Tasks = ({ categories, tasks, handleNewTask, handleDeleteTask }) => {
 
@@ -19,6 +20,7 @@ const Tasks = ({ categories, tasks, handleNewTask, handleDeleteTask }) => {
             return (
             <div>
                 <p>{task.name} | {task.minutes} minutes </p>
+                {/* <DeleteButton deleteData={deleteTask}/> */}
                 <i className="material-icons btn" onClick={()=>deleteTask(task)}>X</i>
             </div>
             )
