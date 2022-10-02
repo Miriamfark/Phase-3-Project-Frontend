@@ -9,7 +9,6 @@ const Days = ({ days }) => {
         return <Link to={`/days/${day.id}`} className= "btn" key={day.id}>{day.name}</Link>
     })
 }
-console.log(days)
 
   return (
 

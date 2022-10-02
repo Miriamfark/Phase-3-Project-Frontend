@@ -14,8 +14,9 @@ function App() {
  const [days, setDays] = useState([])
  const [categories, setCategories] = useState([])
  const [tasks, setTasks] = useState([])
- const [dayId, setDayId] = useState()
  const [toDoToday, setToDoToday] = useState([])
+ const [todaysTasksDisplayed, setTodaysTasksDisplayed] = useState([])
+
 
 
   useEffect(() => {
@@ -50,27 +51,30 @@ function handleDeleteCategory(id) {
   setCategories(updateCategories)
 }
 
-function updateTask(id) {
+function fetchTodaysTasks(id) {
+  fetch(`http://localhost:9292/days/today/${id}`)
+    .then(r => r.json())
+    .then(data => setTodaysTasksDisplayed(data))
+}
 
-  setDayId(id)
-  console.log("dayId", dayId)
 
+function updateTask(id, dayId) {
+  
   fetch(`http://localhost:9292/tasks/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        body: dayId,
-      }),
+          day_id: dayId
+      })
     })
+    
       .then((r) => r.json())
       .then((data) => {
-        console.log(data)
         setToDoToday([...toDoToday, data])
-});
-
-      
+        fetchTodaysTasks(dayId)
+      });    
 }
 
 function onNewCategory(newCategory) {
@@ -94,7 +98,11 @@ function onNewCategory(newCategory) {
                 <Route path="/tasks/new" element={<h1>New Task Form</h1>} />
                 <Route exact path="/" element={<Home />} />
                 <Route path="/days/*" element={<Days days={days} />} />
-                <Route path="/days/:id" element={<DayCard tasks={tasks} updateTask={updateTask} todoToday={toDoToday} />} />
+                <Route path="/days/:id" element={<DayCard 
+                tasks={tasks} 
+                updateTask={updateTask}
+                todaysTasksDisplayed={todaysTasksDisplayed}
+                fetchTodaysTasks={fetchTodaysTasks} />} />
                 <Route path="/categories/*" element={<Categories 
                 categories={categories} 
                 onNewCategory={onNewCategory}

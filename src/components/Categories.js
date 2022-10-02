@@ -18,7 +18,7 @@ const Categories = ({ categories, onNewCategory, handleDeleteCategory }) => {
         mappedCategories = categories.map((category)=>{
             return(
               <>
-               <div key={category.id} className="btn">{category.name}</div>
+               <div key={category.id}>{category.name}</div>
                <i className="material-icons btn" onClick={()=>deleteCategory(category)}>X</i>
               </>
                )
