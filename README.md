@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+# Phase 3 Project: To Do App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Organize your to-do list with this handy To Do App. This is a project built for Flatiron school, showcasing skills aquired in using ActiveRecord, Sinatra, and Ruby Object-Oriented Programming.
 
-## Available Scripts
+## Project Purepose
 
-In the project directory, you can run:
+This app is a must for every busy person! Use the To Do App to create a customized list of one's common everyday tasks, organized according to category, and assign tasks to a day of the week. This project demonstrates the use of ActiveRecord to create three tables: days, categories, and tasks. The Tasks table has full CRUD capability, while the task table has the ability to get, post, and delete. The frontend is built with React.
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Displays all the days in a week
+- Displays list of tasks
+- User can delete a task from the list
+- User can add a task to the list, and assign a task to a specific category
+- User can delete a category
+- User can create a new category
+- User can assign a task to a specific day, and have the task display on the assigned day's to-do list
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## How To Use
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Start by forking and cloning this github repository (the frontend), and pasting it into a new folder in your teminal.
+2. Fork and clone the following github repository (the backend) into the same folder: https://github.com/Miriamfark/phase-3-sinatra-react-project
+3. Install all dependencies from the frontend server by running 
+$npm install
+4. Start the frontend server by running 
+$npm start
+5. Install all dependencies from the backend server by running
+$ bundle install
+6. Start the backend server by running
+$bundle exec rake server
 
-### `npm run build`
+## Technologies Used
+Active Record, Ruby, Sinatra, create-react-app
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+#### Note: This app is an SPA (single page application)
