@@ -22,13 +22,13 @@ This app is a must for every busy person! Use the To Do App to create a customiz
 1. Start by forking and cloning this github repository (the frontend), and pasting it into a new folder in your teminal.
 2. Fork and clone the following github repository (the backend) into the same folder: https://github.com/Miriamfark/phase-3-sinatra-react-project
 3. Install all dependencies from the frontend server by running 
-$npm install
+`$npm install`
 4. Start the frontend server by running 
-$npm start
+`$npm start`
 5. Install all dependencies from the backend server by running
-$ bundle install
+`$ bundle install`
 6. Start the backend server by running
-$bundle exec rake server
+`$bundle exec rake server`
 
 ## Technologies Used
 Active Record, Ruby, Sinatra, create-react-app
