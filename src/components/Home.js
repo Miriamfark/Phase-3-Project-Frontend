@@ -1,8 +1,11 @@
 import React from 'react'
+import Days from './Days.js'
 
-const Home = () => {
+const Home = ({ days }) => {
   return (
-    <div>Home</div>
+    <div>
+      <Days days={days} />
+    </div>
   )
 }
 

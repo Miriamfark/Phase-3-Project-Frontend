@@ -96,8 +96,8 @@ function onNewCategory(newCategory) {
                 />
                 } />
                 <Route path="/tasks/new" element={<h1>New Task Form</h1>} />
-                <Route exact path="/" element={<Home />} />
-                <Route path="/days/*" element={<Days days={days} />} />
+                <Route exact path="/" element={<Home days={days} />} />
+                {/* <Route path="/days/*" element={<Days days={days} />} /> */}
                 <Route path="/days/:id" element={<DayCard 
                 tasks={tasks} 
                 updateTask={updateTask}
