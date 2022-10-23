@@ -14,6 +14,8 @@ const Tasks = ({ categories, tasks, handleNewTask, handleDeleteTask }) => {
     handleDeleteTask(task.id)
     }
 
+    
+
     let mappedTasks
     if (tasks) {
         mappedTasks = tasks.map((task)=>{

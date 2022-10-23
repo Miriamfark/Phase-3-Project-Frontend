@@ -1,33 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-const DayCard = ({ tasks, updateTask, todaysTasksDisplayed, fetchTodaysTasks }) => {
+const DayCard = ({ days, tasks, updateTask }) => {
 
     const [day, setDay] = useState("")
+    const [todaysTasks, setTodaysTasks] = useState([])
+    const [taskList, setTaskList] = useState(tasks)
 
     let { id } = useParams()
+
+  //  const found = array1.find(element => element > 10);
+  // find specific day from days array that matches id from url
+  // take out extra get request - find the tasks associated with day
+  // days inside dependancy array inside useEffect
 
     useEffect(() => {
         fetch(`http://localhost:9292/days/${id}`)
             .then(r => r.json())
-            .then(data => setDay(data.name))
-    }, [])
-
-   useEffect(() => {
-    fetchTodaysTasks(id)
-   }, [])
-  
-
+            .then(data => {
+              setDay(data.name)
+              setTodaysTasks(data.tasks)
+            })
+    }, [todaysTasks])
+    
     let mappedTodaysTasks
-    if(todaysTasksDisplayed){
-    mappedTodaysTasks = todaysTasksDisplayed.map((task)=>{
+    if(days){ 
+      mappedTodaysTasks= todaysTasks.map((task)=>{
       return <li key={task.id}>{task.name} | {task.minutes} minutes</li>
-    })
-  }
-
-    let mappedTasks
-    if(tasks){
-      mappedTasks = tasks.filter((task)=> task.day_id != id).map((task)=>{
+    })}
+  
+   const mappedTasks= taskList.map((task)=>{
         return(
             <>
                 <p key={task.id}>{task.name}</p>
@@ -35,6 +37,31 @@ const DayCard = ({ tasks, updateTask, todaysTasksDisplayed, fetchTodaysTasks }) 
             </>
         )
       })
+
+    function updateTask(id, dayId) {
+  
+        fetch(`http://localhost:9292/tasks/${id}`, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                day_id: dayId
+            })
+          })
+          
+            .then((r) => r.json())
+            .then((data) => {
+              setTodaysTasks([...todaysTasks, data])
+              updateTaskList(id)
+            });    
+    }
+    
+    function updateTaskList(id) {
+      const indexOfTask = taskList.findIndex((task)=> task.id === id)
+      const updatedTaskList = [...taskList]
+      updatedTaskList.splice(indexOfTask, 1)
+      setTaskList(updatedTaskList)
     }
 
    
@@ -47,7 +74,7 @@ const DayCard = ({ tasks, updateTask, todaysTasksDisplayed, fetchTodaysTasks }) 
           {mappedTodaysTasks.length > 0 ? <ul>{mappedTodaysTasks}</ul> : <h1>You have nothing to do today! Click below to add a task to your list</h1>}
         </div>
        
-        <h5>Click on a task to add to to your to do list</h5>
+        <h5>Add Tasks Below!</h5>
         <div>
             {mappedTasks}
         </div> 

@@ -1,10 +1,12 @@
 import React from 'react'
 import Days from './Days.js'
 
-const Home = ({ days }) => {
+const Home = ({ days, fetchTodaysTasks }) => {
+
+
   return (
     <div>
-      <Days days={days} />
+      <Days days={days} fetchTodaysTasks={fetchTodaysTasks} />
     </div>
   )
 }

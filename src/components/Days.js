@@ -6,7 +6,12 @@ const Days = ({ days }) => {
     let mappedDays
     if (days){
     mappedDays = days.map((day)=>{
-        return <Link to={`/days/${day.id}`} className= "btn" key={day.id}>{day.name}</Link>
+        return( 
+          <>
+            <Link to={`/days/${day.id}`} className= "btn" key={day.id}>{day.name}</Link>
+
+          </>
+        )
     })
 }
 
