@@ -9,11 +9,6 @@ const DayCard = ({ days, tasks, updateTask }) => {
 
     let { id } = useParams()
 
-  //  const found = array1.find(element => element > 10);
-  // find specific day from days array that matches id from url
-  // take out extra get request - find the tasks associated with day
-  // days inside dependancy array inside useEffect
-
     useEffect(() => {
         fetch(`http://localhost:9292/days/${id}`)
             .then(r => r.json())
