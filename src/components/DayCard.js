@@ -2,15 +2,22 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 const DayCard = ({ days, tasksM, updateTask }) => {
+  const [day, setDay] = useState({})
   const [todaysTasks, setTodaysTasks] = useState([])
-  const [day, setDay] = useState("")
 
 
     let { id } = useParams()
     
 useEffect(() => {
-    setDay(days.find((d) => d.id == id))
+  if (days.length > 0) {
+  const selectedDay = days.find((d) => d.id == id)
+    setDay(selectedDay)
+    setTodaysTasks(selectedDay.tasks)}
   }, [days])
+
+//filter only select ones not in other group
+//display remainder remainder == all tasks.filter condition keep it if not in other array
+//update state
         
     const mappedTodaysTasks= todaysTasks.map((task)=>{
       return <li key={task.id}>{task.name} | {task.minutes} minutes</li>
@@ -39,7 +46,9 @@ useEffect(() => {
           
             .then((r) => r.json())
             .then((data) => {
-              setTodaysTasks([...todaysTasks, data])
+              const updatedTasks = [...todaysTasks, data]
+              setTodaysTasks(updatedTasks)
+              setDay({...day, tasks: updatedTasks})
             });    
     }
     
