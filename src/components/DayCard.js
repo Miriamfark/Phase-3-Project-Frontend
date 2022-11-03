@@ -1,30 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-const DayCard = ({ days, tasks, updateTask }) => {
+const DayCard = ({ days, tasksM, updateTask }) => {
+  const [todaysTasks, setTodaysTasks] = useState([])
+  const [day, setDay] = useState("")
 
-    const [day, setDay] = useState("")
-    const [todaysTasks, setTodaysTasks] = useState([])
-    const [taskList, setTaskList] = useState(tasks)
 
     let { id } = useParams()
-
-    useEffect(() => {
-        fetch(`http://localhost:9292/days/${id}`)
-            .then(r => r.json())
-            .then(data => {
-              setDay(data.name)
-              setTodaysTasks(data.tasks)
-            })
-    }, [todaysTasks])
     
-    let mappedTodaysTasks
-    if(days){ 
-      mappedTodaysTasks= todaysTasks.map((task)=>{
+useEffect(() => {
+    setDay(days.find((d) => d.id == id))
+  }, [days])
+        
+    const mappedTodaysTasks= todaysTasks.map((task)=>{
       return <li key={task.id}>{task.name} | {task.minutes} minutes</li>
-    })}
-  
-   const mappedTasks= taskList.map((task)=>{
+    })
+    
+   const mappedTasks= tasksM.map((task)=>{
         return(
             <>
                 <p key={task.id}>{task.name}</p>
@@ -48,22 +40,15 @@ const DayCard = ({ days, tasks, updateTask }) => {
             .then((r) => r.json())
             .then((data) => {
               setTodaysTasks([...todaysTasks, data])
-              updateTaskList(id)
             });    
     }
     
-    function updateTaskList(id) {
-      const indexOfTask = taskList.findIndex((task)=> task.id === id)
-      const updatedTaskList = [...taskList]
-      updatedTaskList.splice(indexOfTask, 1)
-      setTaskList(updatedTaskList)
-    }
-
+  
    
 
   return (
     <div className="btn">
-        {day}
+        {day.name}
         <h4>To Do Today</h4>
         <div>
           {mappedTodaysTasks.length > 0 ? <ul>{mappedTodaysTasks}</ul> : <h1>You have nothing to do today! Click below to add a task to your list</h1>}

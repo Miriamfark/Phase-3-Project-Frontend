@@ -5,15 +5,12 @@ const CategoryCard = ({ categories }) => {
 
   let { id } = useParams()
 
-  const filteredCategory = categories.filter((category) => {
-    return category.id == id
-  })
+  const filteredCategory = categories.filter((category) => category.id == id)
 
   const tasks = filteredCategory[0].tasks.map((task) => {
     return <li key={task.id}>{task.name} | {task.minutes} minutes</li>
   })
-
-  
+ 
 
   return (
     <div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import NewTaskForm from './NewTaskForm.js'
 
-const Tasks = ({ categories, tasks, handleNewTask, handleDeleteTask }) => {
+const Tasks = ({ categories, tasksM, handleNewTask, handleDeleteTask }) => {
 
   const [formIsDisplayed, setFormIsDisplayed] = useState(false)
 
@@ -15,9 +15,8 @@ const Tasks = ({ categories, tasks, handleNewTask, handleDeleteTask }) => {
 
     
 
-    let mappedTasks
-    if (tasks) {
-        mappedTasks = tasks.map((task)=>{
+   
+       const mappedTasks = tasksM.map((task)=>{
             return (
             <div>
                 <p>{task.name} | {task.minutes} minutes </p>
@@ -25,7 +24,7 @@ const Tasks = ({ categories, tasks, handleNewTask, handleDeleteTask }) => {
             </div>
             )
         })
-    }
+    
 
     function handleToggleForm() {
       setFormIsDisplayed(!formIsDisplayed)
